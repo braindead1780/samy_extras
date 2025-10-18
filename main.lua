@@ -63,7 +63,7 @@ local function UseExtras()
         if DoesExtraExist(veh, extraID) then
             local isOn = IsVehicleExtraTurnedOn(veh, extraID)
             table.insert(options, {
-                title = string.format("Toggle Extra ID #%d", extraID),
+                title = string.format("ID #%d", extraID),
                 icon = isOn and "toggle-on" or "toggle-off",
                 onSelect = function()
                     SetVehicleExtra(veh, extraID, isOn and 1 or 0)
@@ -82,11 +82,11 @@ local function UseExtras()
     lib.showContext("extras_menu")
 end
 
-RegisterCommand("vehmenu", function()
+RegisterCommand("extras", function()
     local playerPed = cache.ped
-
+    print('G')
     lib.registerContext({
-        id = 'vehmenu',
+        id = 'samy_extras',
         title = "Car menu",
         canClose = true,
         options = {
@@ -106,7 +106,7 @@ RegisterCommand("vehmenu", function()
             }
         }
     })
-    lib.showContext('vehmenu')
+    lib.showContext('samy_extras')
 end)
 
 exports('UseLivery', UseLivery)
