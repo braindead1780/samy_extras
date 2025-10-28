@@ -84,7 +84,6 @@ end
 
 RegisterCommand("extras", function()
     local playerPed = cache.ped
-    print('G')
     lib.registerContext({
         id = 'samy_extras',
         title = "Car menu",
@@ -111,3 +110,4 @@ end)
 
 exports('UseLivery', UseLivery)
 exports('UseExtras', UseExtras)
+
