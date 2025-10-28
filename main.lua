@@ -36,7 +36,7 @@ local function UseLivery(veh)
             icon = selected and "toggle-on" or "toggle-off",
             onSelect = function()
                 SetVehicleLivery(veh, i)
-                UseLivery()
+                UseLivery(veh)
             end
         })
     end
@@ -108,5 +108,6 @@ end)
 
 exports('UseLivery', UseLivery)
 exports('UseExtras', UseExtras)
+
 
 
