@@ -82,7 +82,6 @@ end
 RegisterCommand("extras", function()
     local veh = cache.vehicle
     if not veh then return end
-    if GetVehicleClass(veh) ~= 18 then return end
     lib.registerContext({
         id = 'samy_extras',
         title = "Car menu",
@@ -109,3 +108,4 @@ end)
 
 exports('UseLivery', UseLivery)
 exports('UseExtras', UseExtras)
+
