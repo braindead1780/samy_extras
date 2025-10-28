@@ -4,15 +4,12 @@ local function GetVehicleName(veh)
     return GetLabelText(displayName)
 end
 
-local function UseLivery()
-    local veh = cache.vehicle
-    if not veh then return end
-
+local function UseLivery(veh)
     SetVehicleModKit(veh, 0)
 
     local options = {}
     local stickerCount = GetNumVehicleMods(veh, 48)
-    local liveryCount  = GetVehicleLiveryCount(veh)
+    local liveryCount  = GetVehicleLiveryCount(veh) - 1
     local currentSticker = GetVehicleMod(veh, 48)
     local currentLivery  = GetVehicleLivery(veh)
     
@@ -30,7 +27,7 @@ local function UseLivery()
         })
     end
 
-    for i = 0, liveryCount - 1 do
+    for i = 0, liveryCount do
         local label = GetLabelText(GetLiveryName(veh, i)) or "Null"
         local selected = currentLivery == i
 
@@ -46,14 +43,13 @@ local function UseLivery()
     lib.registerContext({
         id = "liveries_menu",
         title = string.format("Liveries - %s", GetVehicleName(veh)),
+        menu = 'samy_extras',
         options = options
     })
     lib.showContext("liveries_menu")
 end
 
-local function UseExtras()
-    local veh = cache.vehicle
-    if not veh then return end
+local function UseExtras(veh)
     if IsVehicleDamaged(veh) then
         return
     end
@@ -75,6 +71,7 @@ local function UseExtras()
     if #options == 0 then return end
     lib.registerContext({
         id = "extras_menu",
+        menu = 'samy_extras',
         title = string.format("Extras - %s", GetVehicleName(veh)),
         options = options
     })
@@ -83,7 +80,9 @@ local function UseExtras()
 end
 
 RegisterCommand("extras", function()
-    local playerPed = cache.ped
+    local veh = cache.vehicle
+    if not veh then return end
+    if GetVehicleClass(veh) ~= 18 then return end
     lib.registerContext({
         id = 'samy_extras',
         title = "Car menu",
@@ -93,14 +92,14 @@ RegisterCommand("extras", function()
                 title = "Extras",
                 description = "Enable or disable extras",
                 onSelect = function()
-                    UseExtras()
+                    UseExtras(veh)
                 end
             },
             {
                 title = "Livery",
                 description = "Enable or disable livery",
                 onSelect = function()
-                    UseLivery()
+                    UseLivery(veh)
                 end
             }
         }
@@ -110,4 +109,3 @@ end)
 
 exports('UseLivery', UseLivery)
 exports('UseExtras', UseExtras)
-
