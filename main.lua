@@ -22,7 +22,7 @@ local function UseLivery(veh)
             icon = selected and "toggle-on" or "toggle-off",
             onSelect = function()
                 SetVehicleMod(veh, 48, i)
-                UseLivery()
+                UseLivery(veh)
             end
         })
     end
@@ -63,7 +63,7 @@ local function UseExtras(veh)
                 icon = isOn and "toggle-on" or "toggle-off",
                 onSelect = function()
                     SetVehicleExtra(veh, extraID, isOn and 1 or 0)
-                    UseExtras()
+                    UseExtras(veh)
                 end
             })
         end
@@ -108,4 +108,5 @@ end)
 
 exports('UseLivery', UseLivery)
 exports('UseExtras', UseExtras)
+
 
